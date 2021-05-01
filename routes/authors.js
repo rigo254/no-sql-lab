@@ -17,6 +17,38 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/consulta1', async (req, res) => {
+  try {
+    let filters = {};
+    filters = {publicados: {$gte: 20}, pais: {$eq:"Colombia"}};
+    const authors = await Author.find(filters,{nombre: 1,apellido: 1,_id: 0});
+    res.json(authors);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+router.get('/consulta2', async (req, res) => {
+  try {
+    let filters = {};
+    filters = {apellido: {$exists:true}};
+    const authors = await Author.find(filters,{nombre: 1,_id: 0});
+    res.json(authors);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+router.get('/consulta3', async (req, res) => {
+  try {
+    let filters = {};
+    filters = {$or:[{publicados: {$gt: 20}}, {pais: {$eq:"Argentina"}}]};
+    const authors = await Author.find(filters,{apellido: 1,_id: 0});
+    res.json(authors);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
 /**
  * Create a new Author
  */
