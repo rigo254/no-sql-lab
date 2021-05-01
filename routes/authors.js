@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
 router.get('/consulta1', async (req, res) => {
   try {
     let filters = {};
-    filters = {publicados: {$gte: 20}, pais: {$eq:"Colombia"}};
+    filters = {publicados: {$lt: 20}, pais: {$eq:"Colombia"}};
     const authors = await Author.find(filters,{nombre: 1,apellido: 1,_id: 0});
     res.json(authors);
   } catch (err) {
