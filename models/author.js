@@ -7,7 +7,7 @@ const AuthorSchema = new mongoose.Schema({
   },
   apellido: {
     type: String,
-    required: true,
+    required: false,
   },  
   publicados: {
     type: Number,
